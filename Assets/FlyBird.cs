@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlyBird : MonoBehaviour
 {
+    [SerializeField] HttpManager manager;
     public GameManager gameManager;
     public float velocity = 1;
     private Rigidbody2D rb;
@@ -29,6 +30,10 @@ public class FlyBird : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (Score.score > PlayerPrefs.GetInt("highscore"))
+        {
+            manager.UpdateHighScore();
+        }
         gameManager.GameOver();
     }
 }

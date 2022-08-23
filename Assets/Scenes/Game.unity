@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leaderboard: {fileID: 1361440174}
-  URL: https://my-json-server.typicode.com/HeroFromThePast/FakeApi-SiD-2022-2
+  URL: https://unitywebrequest-restapi.herokuapp.com
 --- !u!1 &1651017538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,6 +1521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab91763de823abd49a3b8c5e5585c0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 1521267448}
   gameManager: {fileID: 1521267446}
   velocity: 1.4
 --- !u!70 &2053816046

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] HttpAuthHandler manager;
     public GameObject gameOverCanvas;
 
     // Start is called before the first frame update
@@ -15,6 +16,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (PlayerPrefs.GetInt("highscore") < Score.score)
+        {
+            manager.UpdateHighScore();
+        }
         gameOverCanvas.SetActive(true);
         Time.timeScale = 0;
     }

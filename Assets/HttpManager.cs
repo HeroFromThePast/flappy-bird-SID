@@ -29,6 +29,8 @@ public class HttpManager : MonoBehaviour
         Username = PlayerPrefs.GetString("username");
         HighScore = PlayerPrefs.GetInt("highScore");
 
+        Debug.Log("highscore: " + PlayerPrefs.GetInt("highscore"));
+
         Debug.Log("token:" + Token);
 
         
@@ -126,16 +128,18 @@ public class HttpManager : MonoBehaviour
         if (www.isNetworkError)
         {
             Debug.Log("NETWORK ERROR " + www.error);
-            Debug.Log(www.downloadHandler.text);
+            
         }
         else if (www.responseCode == 200)
         {
             //Debug.Log(www.downloadHandler.text);
             AuthData resData = JsonUtility.FromJson<AuthData>(www.downloadHandler.text);
-
-            Debug.Log("Bienvenido " + resData.usuario.username + ", id:" + resData.usuario._id);
+            Debug.Log(www.downloadHandler.text);
+            Debug.Log("Bienvenido " + resData.username);
 
             StartCoroutine(LogIn(postData));
+
+            PlayerPrefs.SetInt("highscore", 0);
             
         }
         else
@@ -169,7 +173,7 @@ public class HttpManager : MonoBehaviour
             Debug.Log("Autenticado");
             Debug.Log("token: " + resData.token);
             PlayerPrefs.SetString("token", resData.token);
-            PlayerPrefs.SetString("username", resData.usuario.username);
+            PlayerPrefs.SetString("username", resData.username);
             SceneManager.LoadScene("Game");
 
         }
@@ -224,6 +228,7 @@ public class HttpManager : MonoBehaviour
     public IEnumerator UpdateScore(string postData)
     {
         Debug.Log("patch score");
+        Debug.Log("highscore: " + PlayerPrefs.GetInt("highscore"));
 
 
         string url = URL + "/api/usuarios";
@@ -257,13 +262,13 @@ public class HttpManager : MonoBehaviour
 }
 
 
-[System.Serializable]
-public class ScoreData
-{
-    public int score;
-    public string username;
+//[System.Serializable]
+//public class ScoreData
+//{
+//    public int score;
+//    public string username;
 
-}
+//}
 
 [System.Serializable]
 public class Scores
